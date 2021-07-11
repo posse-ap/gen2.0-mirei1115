@@ -1,0 +1,18 @@
+.whole {
+    width:500px;
+    margin:0 auto;
+}
+.under {
+    border-bottom: solid 3px yellow;
+}
+.up {
+    width: 120%;
+    padding: 3px;
+    margin: 3px;
+    border: solid 1px #dcdcdc;
+}
+.up p {
+    margin: 3px;
+    padding: 3px;
+    font-weight: bold;
+}
