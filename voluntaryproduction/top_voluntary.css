@@ -1,0 +1,212 @@
+.row {
+    display: flex;
+    /*  横並びの際に使う */
+}
+
+/****** header ******/
+
+.header {
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    background: white;
+    width: 100%;
+    height: 64px;
+    z-index: 100;
+    box-shadow: 3px 3px 3px rgb(204 204 204);
+    /* 右と下に影をつけて(最初の2つで示す)、3px分ぼかしをいれている */
+}
+
+.img {
+    padding: 10px 20px 10px 60px;
+}
+
+
+.top-title {
+    color: #9FBED4;
+    line-height: 64px;
+}
+
+.right-header {
+    /* 親要素 */
+    position: relative;
+    height: 64px;
+    margin-right: 130px;
+}
+
+.btn,
+a.btn,
+button.btn {
+    /* 子要素 */
+    position: absolute;
+    top: 50%;
+    -webkit-transform : translate(-50%,-50%);
+    transform : translate(-50%,-50%);
+    width: 100px;
+    text-align: center;
+    /* BOX内の文字も中央寄せ */
+    height: 30px;
+    line-height: 30px;
+    padding: 6px 35px;
+    cursor: pointer;
+    box-shadow: 2px 2px 8px skyblue;
+}
+
+.btn--blue,
+a.btn--blue {
+    color: white;
+    background: linear-gradient(to right, #0072AE, #69C8F1);
+}
+
+.btn--blue:hover,
+a.btn--blue:hover {
+    color: white;
+    background: linear-gradient(to right, #0072AE, #69C8F1);
+}
+
+a.btn--radius {
+    border-radius: 100vh;
+}
+
+/****** body ******/
+
+.whole {
+    margin-top: 64px;
+    padding-top: 20px;
+    background-color: #F5F5F8;
+    min-height: 88vh;
+    min-width: 100vw;
+    z-index: 0;
+}
+
+.left-body {
+    margin-left: 130px;
+}
+
+.menu-list {
+    position: relative;
+    background: white;
+    margin-right: 20px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px rgb(204 204 204);
+}
+
+.today {
+    padding: 0 73px;
+}
+
+.month {
+    padding: 0 67.5px;
+}
+
+.total {
+    padding: 0 57px;
+}
+
+.menu-list li {
+    list-style: none;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.menu-title {
+    color: #046FBC;
+    font-weight: bold;
+}
+
+.menu-count {
+    color: #0c0c0c;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.menu-hour {
+    color: #9FBED4;
+}
+
+.left-graph {
+    background: skyblue;
+    height: 320px;
+    margin: 20px 20px 0 0;
+    padding: 20px 50px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px rgb(204 204 204);
+}
+
+.right-body {
+    margin-right: 130px
+}
+
+.right-graph {
+    background: white;
+    height: 470px;
+    width: 300px;
+    /* display: block; */
+    padding: 50px 0 0 20px;
+    margin-right: 20px;
+    /* width: 97%; */
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px rgb(204 204 204);
+}
+
+/* <style type="text/css">
+.code:before{content:"\03c";}
+</style> */
+
+.daily-bottom {
+    /* display: flex; */
+    justify-content: center;
+    padding: 30px 0;
+    margin-top: 20px;
+}
+
+.code {
+    font-weight: bold;
+}
+p.code:before {
+    content: "\03c";
+    color: #046FBC;
+    padding-right: 20px;
+}
+
+p.code:after {
+    content: "\03e";
+    color: #9FBED4;
+    padding-left: 20px;
+}
+
+/* .code.icon {
+    color: #000;
+    margin-left: 3px;
+    margin-top: 6px;
+} */
+
+/* .code.icon:before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-left: solid 1px #046FBC;
+    border-top: solid 1px #046FBC;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    text-align: center;
+}
+
+.code.icon:after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    width: 8px;
+    height: 8px;
+    border-bottom: solid 1px #9FBED4;
+    border-right: solid 1px #9FBED4;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+} */
+
+/* .daily-bottom {
+    font-weight: bold;
+    text-align: center;
+} */
