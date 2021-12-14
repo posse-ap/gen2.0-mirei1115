@@ -1,82 +1,73 @@
-/* ページ全体 */
-
-.main {
+.whole {
+    width:500px;
     margin: 0 auto;
-    width: 570px;
-    margin-top: 90px;
-    margin-bottom: 90px;
 }
 
-/* 問題 */
-
-.quiz {
-    margin-top: 20px;
+.title {
+    font-size: 20px;
+    padding-bottom: 10px;
+    margin-top: 18px;
+    border-bottom: solid 3px yellow;
+    display: inline-block;
 }
 
-.quiz h1 {
-    font-size: 17px;
-    display: inline;
-    background: linear-gradient(transparent 70%, #f7ff4e 0);
+.choice_square {
+    display: block;
+    width: 120%;
+    padding: 15px;
+    margin: 10px auto;
+    border: solid 1px #dcdcdc;
+    box-shadow: 1px 1px 3px #dcdcdc;
+    font-weight: bold;
 }
 
-.quiz img {
-    width: 100%;
-    margin: 0 auto 0;
-}
-
-.quiz ul {
-    list-style: none;
-    margin: 10px 0;
-    padding: 13px 0;
-}
-
-.quiz li {
-    font-weight: 600;
-    padding: 0.1em 0.5em;
-    border: solid 1px #d3d3d3;
-    box-shadow: 0 2px 6px rgba(100, 100, 100, 0.2);
-    margin-bottom: 6px;
-    height: 39px;
-    padding-left: 13px;
-    padding-top: 13px;
-}
-
-/* 選択肢（回答前） */
-
-.quiz .answerlist {
-    cursor: pointer;
-}
-
-/* 選択肢（回答後）（正解） */
-
-.quiz .answer_valid {
-    background-color: #08b3f0;
-    color: #ffffff;
-}
-
-/* 選択肢（回答後）（不正解） */
-
-.quiz .answer_invalid {
-    background-color: #fd6647;
-    color: #ffffff;
-}
-
-/* 問題 答えボックス */
-
-.quiz .answerbox {
+.message {
+    background: #F5F5f5;
+    width: 118%;
+    padding: 18px;
     display: none;
-    height: 77px;
-    line-height: 30px;
 }
 
-/* 問題 答えボックス 正解 */
-
-.quiz .answerbox_valid {
-    background: linear-gradient(transparent 70%, #08b3f0 0);
+.message_true {
+    margin-bottom: 10px;
+    padding-bottom: 3px;
+    font-weight: bold;
+    border-bottom: solid 3px #287DFF;
+    display: inline-block;
 }
 
-/* 問題 答えボックス 不正解 */
+.message_false {
+    margin-bottom: 10px;
+    padding-bottom: 3px;
+    font-weight: bold;
+    border-bottom: solid 3px #FF5128;
+    display: inline-block;
+}
 
-.quiz .answerbox_invalid {
-    background: linear-gradient(transparent 70%, #fd6647 0);
+.choice_square_true {
+    display: block;
+    background: #287DFF;
+    width: 120%;
+    padding: 15px;
+    margin: 10px auto;
+    border: solid 1px #dcdcdc;
+    box-shadow: 1px 1px 3px #dcdcdc;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+.choice_square_false {
+    display: block;
+    background: #FF5128;
+    width: 120%;
+    padding: 15px;
+    margin: 10px auto;
+    border: solid 1px #dcdcdc;
+    box-shadow: 1px 1px 3px #dcdcdc;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+.no-pointer {
+    pointer-events: none;
 }

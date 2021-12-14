@@ -1,88 +1,93 @@
-// 問題リスト定義
-// 配列の先頭が正しい回答として設定する
-var question_list = new Array();
-question_list.push(['たかなわ', 'こうわ', 'たかわ']);
-question_list.push(['かめいど', 'かめと', 'かめど']);
-question_list.push(['こうじまち', 'おかとまち', 'かゆまち']);
+'use strict';
 
-// 解答クリック時の処理
-// question_id：問題番号、1問目の場合は[1]を受け取る
-// selection_id：回答番号、選択された選択肢の番号を受け取る
-// valid_id：正解番号、正解の選択肢の番号を受け取る
-function check(question_id, selection_id, valid_id) {
+const choice = [
+    ['たかなわ','たかわ','こうわ'], //0
+    ['かめいど','かめど','かめと'], //1
+    ['こうじまち','かゆまち','おかとまち'], //2
+    ['おなりもん','おかどもん','ごせいもん'], //3
+    ['とどろき','たたら','たたりき'], //4
+    ['しゃくじい','いじい','せきこうい'], //5
+    ['ぞうしき','ざっしき','ざっしょく'], //6
+    ['おかちまち','みとちょう','ごしろちょう'], //7
+    ['ししぼね','ろっこつ','しこね'], //8
+    ['こぐれ','こばく','こしゃく'], //9
+];
+const answer = ['たかなわ','かめいど','こうじまち','おなりもん','とどろき','しゃくじい','ぞうしき','おかちまち','ししぼね','こぐれ',]
+const choiceLength = 3;
 
-    // クリック無効化
-    var answerlists = document.getElementsByName('answerlist_' + question_id);
-    answerlists.forEach(answerlist => {
-        answerlist.style.pointerEvents = 'none';
-    });
+//////表示に関する部分//////
+for (let quizIndex = 0; quizIndex < choice.length; quizIndex++) {
+// i = 0だとfor文が複数出てきたときに煩わしい
 
-    // 選択項目のスタイル設定処理
-    // 選択された選択肢の背景色をオレンジ、正解の選択肢を水色に設定
-    // 選択された選択肢が正解だった場合は水色で上書きする
-    var selectiontext = document.getElementById('answerlist_' + question_id + '_' + selection_id);
-    var validtext = document.getElementById('answerlist_' + question_id + '_' + valid_id);
-    selectiontext.className = 'answer_invalid';
-    validtext.className = 'answer_valid';
+    /**クイズタイトルと画像、選択肢を含ませるdiv要素**/
+    const newDiv = document.createElement('div');
+    newDiv.classList.add("whole"); //クラス名を付ける
+    document.body.appendChild(newDiv); //子要素を親要素の中へ
+    newDiv.insertAdjacentHTML('afterbegin',`<h1 class="title">${quizIndex+1}.この地名はなんて読む？？</h1>`);
+    //このdivいちばん初めに挿入
 
-    // 正解・不正解の表示設定処理
-    var answerbox = document.getElementById('answerbox_' + question_id);
-    var answertext = document.getElementById('answertext_' + question_id);
-    if (selection_id == valid_id) {
-        answertext.className = 'answerbox_valid';
-        answertext.innerText = '正解！';
-    } else {
-        answertext.className = 'answerbox_invalid';
-        answertext.innerText = '不正解！';
+    //画像の表示
+    const newImg = document.createElement('img');
+    newImg.src = `./img/quizy${quizIndex+1}.jpg`;
+    newDiv.appendChild(newImg);
+
+    // ランダムな配列生成
+    for (let i = choiceLength-1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i+1));
+        [choice[quizIndex][j],choice[quizIndex][i]] = [choice[quizIndex][i],choice[quizIndex][j]];
     }
-    answerbox.style.display = 'block';
-}
+    let correctNum = choice[quizIndex].indexOf(answer[quizIndex]);
+    //choice[quizIndex]の中でanswer[quizIndex]は何番目にあるのか探してくれる
 
-// 問題分のHTMLを生成して出力する
-// question_id：問題番号、1問目の場合は[1]を受け取る
-// selection_list：回答の選択肢配列を受け取る
-// valid_id：正解番号、正解の選択肢の番号を受け取る。先頭の選択肢が正解の場合は1となる
-function createquestion(question_id, selection_list, valid_id) {
-    var contents = `<div class="quiz">`
-        + `    <h1>${question_id}. この地名はなんて読む？</h1>`
-        + `    <img src="img/${question_id}.jpg">`
-        + `    <ul>`;
+    //選択肢のul作成
+    const newChoice = document.createElement('ul');
+    newChoice.innerHTML =
+        `<li id="choice${quizIndex}_0" onclick="check(${quizIndex},0,${correctNum})" class="choice_square">${choice[quizIndex][0]}</li>`
+        +`<li id="choice${quizIndex}_1" onclick="check(${quizIndex},1,${correctNum})" class="choice_square">${choice[quizIndex][1]}</li>`
+        +`<li id="choice${quizIndex}_2" onclick="check(${quizIndex},2,${correctNum})" class="choice_square">${choice[quizIndex][2]}</li>`;
+    // check()は引数を与えている
+    newDiv.appendChild(newChoice);
 
-    // selection_listの配列分だけループ処理して選択肢を作成する
-    selection_list.forEach(function (selection, index) {
-        contents += `        <li id="answerlist_${question_id}_${(index + 1)}" name="answerlist_${question_id}" `
-            + `class="answerlist" onclick="check(${question_id}, ${(index + 1)}, ${valid_id})">${selection}</li>`;
-    });
+    //回答ボックスの表示・非表示
+    //正解の時
+    const correctBoxDiv = document.createElement('div');
+    correctBoxDiv.id = `correct${quizIndex}`;
+    correctBoxDiv.classList.add("message");
+    newDiv.appendChild(correctBoxDiv);
+    correctBoxDiv.style= "display:none;"; //非表示
+    correctBoxDiv.insertAdjacentHTML('afterbegin',`<p class="message_true">正解！</p>`);
+    correctBoxDiv.insertAdjacentHTML('beforeend',`<p>正解は${answer[quizIndex]}です！</p>`);
+    //不正解の時
+    const falseBoxDiv = document.createElement('div');
+    falseBoxDiv.id = `false${quizIndex}`;
+    falseBoxDiv.classList.add("message");
+    newDiv.appendChild(falseBoxDiv);
+    falseBoxDiv.style= "display:none;"; //非表示
+    falseBoxDiv.insertAdjacentHTML('afterbegin',`<p class="message_false">不正解！</p>`);
+    falseBoxDiv.insertAdjacentHTML('beforeend',`<p>正解は${answer[quizIndex]}です！</p>`);
+};
 
-    contents += `        <li id="answerbox_${question_id}" class="answerbox">`
-        + `            <span id="answertext_${question_id}"></span><br>`
-        + `            <span>正解は「${selection_list[valid_id - 1]}」です！</span>`
-        + `        </li>`
-        + `    </ul>`
-        + `</div >`;
-    document.getElementById('main').insertAdjacentHTML('beforeend', contents);
-}
-
-// HTMLを生成して出力する
-function createhtml() {
-    // 問題リスト分ループ処理する
-    // 配列をランダムにソートして問題のHTML生成処理を呼ぶ
-    question_list.forEach(function (question, index) {
-        // 正しい回答を記憶
-        answer = question[0];
-
-        // 配列をランダムにソート（Fisher-Yates shuffle）
-        for (var i = question.length - 1; i > 0; i--) {
-            var r = Math.floor(Math.random() * (i + 1));
-            var tmp = question[i];
-            question[i] = question[r];
-            question[r] = tmp;
-        }
-
-        // 問題リストと回答番号を設定して問題のHTML生成処理を呼び出す
-        createquestion(index + 1, question, question.indexOf(answer) + 1);
-    });
-}
-
-// JSファイル読み込み時の処理
-window.onload = createhtml();
+//////クリックした時実行する関数//////
+function check(quizIndex,choiceNum,correctNum) {
+    const clickedBox = document.getElementById(`choice${quizIndex}_${choiceNum}`); //クリックしたliを取得
+    const correctChoiceBox = document.getElementById(`choice${quizIndex}_${correctNum}`); //正解のliを取得
+    const correctBoxDiv = document.getElementById( `correct${quizIndex}`); //正解ボックスのdivを取得
+    const falseBoxDiv = document.getElementById( `false${quizIndex}`); //不正解ボックスのdivを取得
+    // 正誤判定、選択肢にスタイル追加
+    if (choiceNum === correctNum) {
+        correctBoxDiv.style = "display:block;";
+        clickedBox.classList.add('choice_square_true');
+        //クリックできなくする
+        document.getElementById(`choice${quizIndex}_0`).classList.add('no-pointer');
+        document.getElementById(`choice${quizIndex}_1`).classList.add('no-pointer');
+        document.getElementById(`choice${quizIndex}_2`).classList.add('no-pointer');
+    } else {
+        falseBoxDiv.style = "display:block;";
+        clickedBox.classList.add('choice_square_false');
+        correctChoiceBox.classList.add('choice_square_true');
+        //クリックできなくする
+        document.getElementById(`choice${quizIndex}_0`).classList.add('no-pointer');
+        document.getElementById(`choice${quizIndex}_1`).classList.add('no-pointer');
+        document.getElementById(`choice${quizIndex}_2`).classList.add('no-pointer');
+    }
+};
