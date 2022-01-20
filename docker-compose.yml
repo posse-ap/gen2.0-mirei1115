@@ -2,17 +2,18 @@ version: "3" #このdocker-compose.ymlファイルの"書式"のバージョン
 services:
   # mysql
   db:
-    image: mysql:5.7
+    build: ./db #Dockerfileのパス
+    # image: mysql:5.7
     environment:
-        MYSQL_DATABASE: test_php
-        MYSQL_USER: apple
-        MYSQL_PASSWORD: test
-        MYSQL_ROOT_PASSWORD: test
+        MYSQL_DATABASE: quizy_db
+        MYSQL_USER: mirei
+        MYSQL_PASSWORD: aisu
+        MYSQL_ROOT_PASSWORD: aisu
     ports:
         - "4306:3306"
-    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
-    volumes:
-      - ./db/mysql:/var/lib/mysql
+    volumes: #マウント
+      - ./db/data:/var/lib/mysql
+      - ./db/sql:/docker-entrypoint-initdb.d #ローカルにしかないものをdocker内で動くようにする
 
   php: #nginxについて定義するという宣言。
     build: ./php #Dockerfileのパス

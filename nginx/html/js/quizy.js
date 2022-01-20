@@ -28,7 +28,7 @@ for (let quizIndex = 0; quizIndex < choice.length; quizIndex++) {
 
     //画像の表示
     const newImg = document.createElement('img');
-    newImg.src = `./img/quizy${quizIndex+1}.jpg`;
+    newImg.src = `./img/T${quizIndex+1}.jpg`;
     newDiv.appendChild(newImg);
 
     // ランダムな配列生成
