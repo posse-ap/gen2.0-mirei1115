@@ -23,12 +23,12 @@ for (let quizIndex = 0; quizIndex < choice.length; quizIndex++) {
     const newDiv = document.createElement('div');
     newDiv.classList.add("whole"); //クラス名を付ける
     document.body.appendChild(newDiv); //子要素を親要素の中へ
-    newDiv.insertAdjacentHTML('afterbegin',`<h1 class="title">${quizIndex+1}.この地名はなんて読む？？</h1>`);
+    newDiv.insertAdjacentHTML('afterbegin',`<h1 class="title"><?php echo $rowQuestion['question_id'] ?>.この地名はなんて読む？？</h1>`);
     //このdivいちばん初めに挿入
 
     //画像の表示
     const newImg = document.createElement('img');
-    newImg.src = `./img/T${quizIndex+1}.jpg`;
+    newImg.src = `./img/<?php echo $rowQuestion['prefecture_id'].'_'.$rowQuestion['question_id'] ?>.jpg`;
     newDiv.appendChild(newImg);
 
     // ランダムな配列生成
