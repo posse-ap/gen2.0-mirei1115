@@ -15,7 +15,7 @@ const choices = [
 const answers = ['たかなわ','かめいど','こうじまち','おなりもん','とどろき','しゃくじい','ぞうしき','おかちまち','ししぼね','こぐれ',]
 const CHOICE_LENGTH = 3;
 
-choices.forEach(choices => {
+for (let quizIndex = 0; quizIndex < choice.length; quizIndex++) {
     const newDiv = document.createElement('div');
     newDiv.classList.add("whole");
     document.body.appendChild(newDiv);
@@ -51,8 +51,8 @@ choices.forEach(choices => {
     newDiv.appendChild(falseBoxDiv);
     falseBoxDiv.style= "display:none;";
     falseBoxDiv.insertAdjacentHTML('afterbegin',`<p class="message_false">不正解！</p>`);
-    falseBoxDiv.insertAdjacentHTML('beforeend',`<p>正解は${answer[quizIndex]}です！</p>`)
-})
+    falseBoxDiv.insertAdjacentHTML('beforeend',`<p>正解は${answer[quizIndex]}です！</p>`);
+};
 
 function check(quizIndex,choiceNum,correctNum) {
     const clickedBox = document.getElementById(`choice${quizIndex}_${choiceNum}`);
