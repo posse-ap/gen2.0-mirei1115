@@ -1,6 +1,6 @@
 'use strict';
 
-const choice = [
+const choices = [
     ['たかなわ','たかわ','こうわ'],
     ['かめいど','かめど','かめと'],
     ['こうじまち','かゆまち','おかとまち'],
@@ -12,10 +12,10 @@ const choice = [
     ['ししぼね','ろっこつ','しこね'],
     ['こぐれ','こばく','こしゃく'],
 ];
-const answer = ['たかなわ','かめいど','こうじまち','おなりもん','とどろき','しゃくじい','ぞうしき','おかちまち','ししぼね','こぐれ',]
-const choiceLength = 3;
+const answers = ['たかなわ','かめいど','こうじまち','おなりもん','とどろき','しゃくじい','ぞうしき','おかちまち','ししぼね','こぐれ',]
+const CHOICE_LENGTH = 3;
 
-for (let quizIndex = 0; quizIndex < choice.length; quizIndex++) {
+choices.forEach(choices => {
     const newDiv = document.createElement('div');
     newDiv.classList.add("whole");
     document.body.appendChild(newDiv);
@@ -51,8 +51,8 @@ for (let quizIndex = 0; quizIndex < choice.length; quizIndex++) {
     newDiv.appendChild(falseBoxDiv);
     falseBoxDiv.style= "display:none;";
     falseBoxDiv.insertAdjacentHTML('afterbegin',`<p class="message_false">不正解！</p>`);
-    falseBoxDiv.insertAdjacentHTML('beforeend',`<p>正解は${answer[quizIndex]}です！</p>`);
-};
+    falseBoxDiv.insertAdjacentHTML('beforeend',`<p>正解は${answer[quizIndex]}です！</p>`)
+})
 
 function check(quizIndex,choiceNum,correctNum) {
     const clickedBox = document.getElementById(`choice${quizIndex}_${choiceNum}`);
